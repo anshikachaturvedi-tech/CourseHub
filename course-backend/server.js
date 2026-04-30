@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const mysql = require('mysql2');
+const mysql = require('mysql2');  // ✅ only once
 require('dotenv').config();
 
 const app = express();
@@ -53,21 +53,27 @@ app.get('/', (req, res) => {
 });
 
 // ✅ DB Connection
-const connection = mysql.createConnection(process.env.MYSQL_URL);
-connection.connect((err) => {
-  if (err) {
-    console.error('Database connection failed:', err.stack);
-    return;
-  }
-  console.log('Connected to Railway MySQL database.');
+const dbUrl = new URL(process.env.MYSQL_URL);
+const connection = mysql.createConnection({
+  host:     dbUrl.hostname,
+  port:     dbUrl.port || 3306,
+  user:     dbUrl.username,
+  password: dbUrl.password,
+  database: dbUrl.pathname.replace('/', ''),
 });
 
-module.exports = connection;
+connection.connect((err) => {
+  if (err) {
+    console.error('Connection Failed ❌');
+    console.error('Error Code:', err.code);
+    console.error('Message:', err.message);
+    return;
+  }
+  console.log('Connected to Railway MySQL database. ✅');
+});
 
 // ✅ Start server (only once)
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`);
 });
-
-
