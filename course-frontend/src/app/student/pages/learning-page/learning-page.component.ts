@@ -116,7 +116,7 @@ export class LearningPageComponent implements OnInit {
       return url;
     }
 
-    return `http://localhost:5000${url}`;
+    return `${environment.apiOrigin}${url}`;
   }
 
   private convertToEmbedUrl(url: string): string {
