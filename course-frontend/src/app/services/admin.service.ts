@@ -1,7 +1,13 @@
 // import { Injectable } from '@angular/core';
 // import { HttpClient, HttpHeaders } from '@angular/common/http';
 // import { Observable } from 'rxjs';
+// Add this import at the top
+import { environment } from '../../environments/environment';
 
+// Replace hardcoded URL like:
+private apiUrl = 'http://localhost:5000/api/auth';
+// With:
+private apiUrl = `${environment.apiUrl}/auth`;
 // @Injectable({
 //   providedIn: 'root'
 // })
