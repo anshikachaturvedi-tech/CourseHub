@@ -220,7 +220,8 @@ submitContact() {
     : undefined;
 
   this.http
-    .post('http://localhost:5000/api/contacts', this.contact, { headers })
+    // .post('http://localhost:5000/api/contacts', this.contact, { headers })
+    .post(`${environment.apiUrl}/contacts`, this.contact, { headers })
     .subscribe({
       next: () => {
         alert("Message sent successfully ✅");
