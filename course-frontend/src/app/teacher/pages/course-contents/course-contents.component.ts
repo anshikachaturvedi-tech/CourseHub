@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TeacherService } from 'src/app/services/teacher.service';
 import { DomSanitizer } from '@angular/platform-browser';
-
+import { environment } from '../../../../environments/environment';
 @Component({
   selector: 'app-course-contents',
   templateUrl: './course-contents.component.html',
