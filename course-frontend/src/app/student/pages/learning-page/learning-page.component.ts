@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { StudentService } from 'src/app/services/student.service';
-
+import { environment } from '../../../../environments/environment';
 @Component({
   selector: 'app-learning-page',
   templateUrl: './learning-page.component.html',
