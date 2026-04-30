@@ -1,18 +1,23 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const mysql = require('mysql2');  // ✅ only once
+const mysql = require('mysql2');
 require('dotenv').config();
 
 const app = express();
 
-// ✅ CORS
+// ✅ CORS — allow all origins
 app.use(cors({
-  origin: 'http://localhost:4200',
+  origin: function(origin, callback) {
+    callback(null, true);
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
+// ✅ Handle preflight requests
+app.options('*', cors());
 
 // ✅ JSON parser
 app.use(express.json());
@@ -72,7 +77,7 @@ connection.connect((err) => {
   console.log('Connected to Railway MySQL database. ✅');
 });
 
-// ✅ Start server (only once)
+// ✅ Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`);
