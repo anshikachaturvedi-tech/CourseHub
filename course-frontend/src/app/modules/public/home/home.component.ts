@@ -287,7 +287,8 @@ submitWebinar() {
   };
 
   this.isSubmittingWebinar = true;
-  this.http.post('http://localhost:5000/api/webinar', payload).subscribe({
+  // this.http.post('http://localhost:5000/api/webinar', payload).subscribe({
+  this.http.post(`${environment.apiUrl}/webinar`, payload).subscribe({
     next: () => {
       this.isSubmittingWebinar = false;
       alert('✅ Request sent! We will contact you within 24 hours.');
