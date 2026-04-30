@@ -61,7 +61,8 @@ export class AuthService {
   }
 
   getRole(): string | null {
-    return sessionStorage.getItem('role') || this.decodeJwtPayload(this.getToken() ?? '')?.role ?? null;
+    // return sessionStorage.getItem('role') || this.decodeJwtPayload(this.getToken() ?? '')?.role ?? null;
+    return sessionStorage.getItem('role') || (this.decodeJwtPayload(this.getToken() ?? '')?.role ?? null);
   }
 
   isAdmin(): boolean { return this.getRole() === 'admin'; }
