@@ -5,7 +5,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { AdminService } from '../services/admin.service';
 import { ThemeService } from '../services/theme.service';
 import Swal, { SweetAlertResult } from 'sweetalert2';
-
+import { environment } from '../../environments/environment';
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
