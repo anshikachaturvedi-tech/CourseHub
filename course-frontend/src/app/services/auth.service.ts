@@ -59,7 +59,8 @@ import { tap } from 'rxjs/operators';
 })
 export class AuthService {
 
-  baseUrl = 'http://localhost:5000/api/auth';
+  // baseUrl = 'http://localhost:5000/api/auth';
+  baseUrl = environment.apiUrl + '/auth';
 
   constructor(private http: HttpClient) {}
 
