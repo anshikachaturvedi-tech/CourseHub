@@ -1,5 +1,6 @@
 /** Matches backend `thumbnailHelper` API origin usage in this app. */
-const API_ORIGIN = 'http://localhost:5000';
+import { environment } from '../../environments/environment';
+const API_ORIGIN = environment.apiOrigin;
 
 export function extractYouTubeVideoId(url: string): string | null {
   if (!url || typeof url !== 'string') return null;
