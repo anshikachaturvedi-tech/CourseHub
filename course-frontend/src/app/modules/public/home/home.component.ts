@@ -3,7 +3,7 @@ import { CourseService } from 'src/app/services/course.service';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../../environments/environment';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html', 
