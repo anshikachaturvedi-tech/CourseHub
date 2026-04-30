@@ -1,120 +1,75 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-// Add this import at the top
 import { environment } from '../../environments/environment';
 
-// Replace hardcoded URL like:
-private apiUrl = 'http://localhost:5000/api/auth';
-// With:
-private apiUrl = `${environment.apiUrl}/auth`;
 @Injectable({
   providedIn: 'root'
 })
 export class StudentService {
-  private baseUrl = 'http://localhost:5000/api/student';
+
+  private baseUrl = environment.apiUrl + '/student';
 
   constructor(private http: HttpClient) {}
 
   private getAuthHeaders(): HttpHeaders {
-    // Some flows still store token in localStorage; support both.
-    const token =
-      sessionStorage.getItem('token') ||
-      localStorage.getItem('token') ||
-      '';
-
+    const token = sessionStorage.getItem('token') || localStorage.getItem('token') || '';
     return new HttpHeaders(token ? { Authorization: `Bearer ${token}` } : {});
   }
 
   getAllCourses(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/courses`, {
-      headers: this.getAuthHeaders()
-    });
+    return this.http.get(`${this.baseUrl}/courses`, { headers: this.getAuthHeaders() });
   }
 
   getCourseDetails(courseId: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/courses/${courseId}`, {
-      headers: this.getAuthHeaders()
-    });
+    return this.http.get(`${this.baseUrl}/courses/${courseId}`, { headers: this.getAuthHeaders() });
   }
 
   enrollCourse(courseId: number): Observable<any> {
-    return this.http.post(
-      `${this.baseUrl}/enroll/${courseId}`,
-      {},
-      { headers: this.getAuthHeaders() }
-    );
+    return this.http.post(`${this.baseUrl}/enroll/${courseId}`, {}, { headers: this.getAuthHeaders() });
   }
 
   getStudentCourses(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/student-courses`, {
-      headers: this.getAuthHeaders()
-    });
+    return this.http.get(`${this.baseUrl}/student-courses`, { headers: this.getAuthHeaders() });
   }
 
   getLearningPage(courseId: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/course/${courseId}/learn`, {
-      headers: this.getAuthHeaders()
-    });
+    return this.http.get(`${this.baseUrl}/course/${courseId}/learn`, { headers: this.getAuthHeaders() });
   }
 
   markLessonComplete(contentId: number): Observable<any> {
-    return this.http.post(
-      `${this.baseUrl}/lesson/${contentId}/complete`,
-      {},
-      { headers: this.getAuthHeaders() }
-    );
+    return this.http.post(`${this.baseUrl}/lesson/${contentId}/complete`, {}, { headers: this.getAuthHeaders() });
   }
 
   getCourseProgress(courseId: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/course/${courseId}/progress`, {
-      headers: this.getAuthHeaders()
-    });
+    return this.http.get(`${this.baseUrl}/course/${courseId}/progress`, { headers: this.getAuthHeaders() });
   }
 
   getStudentProfile(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/profile`, {
-      headers: this.getAuthHeaders()
-    });
+    return this.http.get(`${this.baseUrl}/profile`, { headers: this.getAuthHeaders() });
   }
 
   updateStudentProfile(data: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/profile`, data, {
-      headers: this.getAuthHeaders()
-    });
+    return this.http.put(`${this.baseUrl}/profile`, data, { headers: this.getAuthHeaders() });
   }
 
   updateStudentPhoto(photo: string): Observable<any> {
-    return this.http.put(
-      `${this.baseUrl}/profile/photo`,
-      { photo },
-      { headers: this.getAuthHeaders() }
-    );
+    return this.http.put(`${this.baseUrl}/profile/photo`, { photo }, { headers: this.getAuthHeaders() });
   }
 
   getStudentCertificates(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/certificates`, {
-      headers: this.getAuthHeaders()
-    });
+    return this.http.get(`${this.baseUrl}/certificates`, { headers: this.getAuthHeaders() });
   }
 
-  /** Contact Us threads for this account email (includes admin `reply` when set) */
   getMyContactMessages(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/contacts`, {
-      headers: this.getAuthHeaders()
-    });
+    return this.http.get(`${this.baseUrl}/contacts`, { headers: this.getAuthHeaders() });
   }
 
   downloadCertificate(courseId: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/certificate/${courseId}/download`, {
-      headers: this.getAuthHeaders()
-    });
+    return this.http.get(`${this.baseUrl}/certificate/${courseId}/download`, { headers: this.getAuthHeaders() });
   }
 
   downloadProtectedPdf(url: string): Observable<Blob> {
-    return this.http.get(url, {
-      headers: this.getAuthHeaders(),
-      responseType: 'blob'
-    });
+    return this.http.get(url, { headers: this.getAuthHeaders(), responseType: 'blob' });
   }
 }
