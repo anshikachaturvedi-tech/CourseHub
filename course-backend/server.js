@@ -4,7 +4,10 @@ const path = require('path');
 require('dotenv').config();
 
 const app = express();
-
+const allowedOrigins = [
+  'http://localhost:4200', 
+  'https://your-angular-app.up.railway.app' // Add your deployed frontend URL here
+];
 // ✅ CORS
 app.use(cors({
   origin: 'http://localhost:4200',
@@ -17,6 +20,10 @@ app.use(cors({
 // ✅ JSON parser
 app.use(express.json());
 
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running on port ${PORT}`);
+});
 // ✅ Global logger
 
 app.use((req, res, next) => {
@@ -64,5 +71,19 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+const mysql = require('mysql2');
+
+// Railway provides the MYSQL_URL which contains all credentials
+const connection = mysql.createConnection(process.env.MYSQL_URL);
+
+connection.connect((err) => {
+  if (err) {
+    console.error('Database connection failed:', err.stack);
+    return;
+  }
+  console.log('Connected to Railway MySQL database.');
+});
+
+module.exports = connection;
 
 
