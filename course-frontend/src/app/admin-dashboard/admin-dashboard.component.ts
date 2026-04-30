@@ -96,7 +96,8 @@ export class AdminDashboardComponent implements OnInit {
   // ─────────────────────────────────────────
   // API BASE
   // ─────────────────────────────────────────
-  private apiBase = 'http://localhost:5000/api';
+  // private apiBase = 'http://localhost:5000/api';
+  private apiBase = environment.apiUrl;
 
   // ─────────────────────────────────────────
   // CONTACTS STATE
