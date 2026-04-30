@@ -176,8 +176,8 @@ import { Observable } from 'rxjs';
 })
 export class AdminService {
 
-  private apiUrl = 'http://localhost:5000/api/admin';
-
+  // private apiUrl = 'http://localhost:5000/api/admin';
+baseUrl = environment.apiUrl + '/auth';
   constructor(private http: HttpClient) {}
 
   /**
