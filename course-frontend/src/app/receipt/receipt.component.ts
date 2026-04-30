@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-receipt',
@@ -14,7 +15,9 @@ export class ReceiptComponent implements OnInit {
 
   ngOnInit(): void {
     this.enrollmentId = Number(this.route.snapshot.paramMap.get('id'));
-    this.receiptUrl = `http://localhost:5000/api/payments/receipt/${this.enrollmentId}`;
+    // this.receiptUrl = `http://localhost:5000/api/payments/receipt/${this.enrollmentId}`;
+ 
+this.receiptUrl = `${environment.apiUrl}/payments/receipt/${this.enrollmentId}`;
   }
 
   downloadReceipt(): void {
